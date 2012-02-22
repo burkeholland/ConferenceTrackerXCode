@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title></title>
+  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no;" />
+	<meta charset="utf-8">
+
+    <link rel="stylesheet" href="styles/kendo.mobile.all.min.css" type="text/css" />		
+
+	<script type="text/javascript" charset="utf-8" src="phonegap-1.3.0.js"></script>
+	
+    <script src="js/jquery.min.js"></script>
+    <script src="js/kendo.mobile.min.js"></script>
+        
+        
+    <script type="text/javascript">
+
+
+	// If you want to prevent dragging, uncomment this section
+	/*
+	function preventBehavior(e) 
+	{ 
+      e.preventDefault(); 
+    };
+	document.addEventListener("touchmove", preventBehavior, false);
+	*/
+	
+	/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
+	see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
+	for more details -jm */
+	/*
+	function handleOpenURL(url)
+	{
+		// TODO: do something with the url passed in.
+	}
+	*/
+	
+	function onBodyLoad()
+	{		
+		document.addEventListener("deviceready", onDeviceReady, false);
+	}
+	
+	/* When this function is called, PhoneGap has been initialized and is ready to roll */
+	/* If you are supporting your own protocol, the var invokeString will contain any arguments to the app launch.
+	see http://iphonedevelopertips.com/cocoa/launching-your-own-application-via-a-custom-url-scheme.html
+	for more details -jm */
+	function onDeviceReady()
+	{
+		// do your thing!
+	}
+    
+    </script>
+	<style>
+		.info {
+			background-image: url('styles/images/comment.png');
+			background-repeat:no-repeat;
+			padding-left: 50px;
+		}
+
+		.speaker {
+			color: gray;
+			font-size: .8rem;
+		}
+
+		.time {
+			float: left;
+			background-color: black;
+			color: white;
+			text-align: center;
+			width: 100px;
+			border: 1px solid;
+			border-radius: 10px;
+			margin-right: 10px
+		}
+		
+		.left {
+			overflow: hidden;
+		}
+
+		.title {
+			margin-left: 10px;
+		}
+
+	</style>
+  </head>
+  <body onload="onBodyLoad()">
+      <div data-role="view" data-init="getInfo" data-layout="app" data-title="info" id="info">
+		   <div id="news"></div>News Goes Here
+      </div>
+
+      <div data-role="view" data-layout="app" data-init="getSessions" data-title="schedule" id="schedule">
+		   <ul id="sessions"></ul>Schedules Goes Here
+      </div>
+      
+      <div data-role="layout" data-id="app">
+          <header data-role="header">
+              <div data-role="navbar">Conference Tracker</div>
+          </header>
+          <footer data-role="footer">
+              <div data-role="tabstrip">
+                  <a href="#info" data-icon="info">Info</a>
+                  <a href="#schedule" data-icon="recents">Schedule</a>
+              </div>
+          </footer>
+      </div>
+      
+	<script type="text/x-kendo-template" id="sessionsTemplate">
+		<div class="left">
+			<div class='time'>${ formatted_time }</div>
+			<div class='speaker'>${ speaker }</div>
+		</div>
+		<div class="title">${ title }</div>
+	</script>
+
+      <script>
+		
+		// creates the application UI
+	    var application = new kendo.mobile.Application($(document).body, { transition: "slide" });
+
+		/*var getInfo = function() {
+			// read from the remote data source
+	      	$.get("http://localhost:3000/infos.json", function(data) {
+				$.each(data, function() {
+					$("#news").append("<p class='info'>" + this.content + "</p>");
+				});
+			});
+		}
+
+		var getSessions = function() {
+			$("#sessions").kendoMobileListView({
+				dataSource: kendo.data.DataSource.create({ 
+					transport: {
+						read: "http://localhost:3000/sessions.json"
+					},
+					group: "day"
+				}),
+				template: $("#sessionsTemplate").html()
+			});
+		}*/
+	
+	</script>
+  </body>
+</html>
